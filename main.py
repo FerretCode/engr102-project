@@ -6,6 +6,8 @@ import pandas as pd
 from datetime import datetime
 # this library will help us print tabular data
 from tabulate import tabulate
+# this library allows us to plot graphs, make charts, etc.
+import matplotlib.pyplot as plt
 
 # define the file path to the CSV file
 FILE_PATH = "Daily_Transit_Ridership.csv"
@@ -143,17 +145,30 @@ for agency in ridership_data:
         # 0 since we can't divide by 0
         monthly_averages[month] = sum(
             ridership) / len(ridership) if ridership else 0
-    
+
     # same thing for weeks
     for week, datapoints in weekly_ridership.items():
-        ridership = [datapoint[5] for datapoint in datapoints] 
+        ridership = [datapoint[5] for datapoint in datapoints]
 
-        weekly_averages[week] = sum(ridership) / len(ridership) if ridership else 0
+        weekly_averages[week] = sum(ridership) / \
+            len(ridership) if ridership else 0
 
     print(f"Averages for {agency}")
 
-    tabular_monthly_averages = [(month, f"{avg:.2f}") for month, avg in monthly_averages.items()]
-    tabular_weekly_averages = [(month, f"{avg:.2f}") for month, avg in weekly_averages.items()]
+    tabular_monthly_averages = [
+        (month, f"{avg:.2f}") for month, avg in monthly_averages.items()]
+    tabular_weekly_averages = [(month, f"{avg:.2f}")
+                               for month, avg in weekly_averages.items()]
 
-    print(tabulate(tabular_monthly_averages, headers=["Month #", "Average Ridership"], tablefmt="grid"))
-    print(tabulate(tabular_weekly_averages, headers=["Weekday #", "Average Ridership"], tablefmt="grid"))
+    print(tabulate(tabular_monthly_averages, headers=[
+          "Month #", "Average Ridership"], tablefmt="grid"))
+    print(tabulate(tabular_weekly_averages, headers=[
+          "Weekday #", "Average Ridership"], tablefmt="grid"))
+
+    monthly_x = list(monthly_averages.keys())
+    monthly_y = list(monthly_averages.values())
+
+    weekly_x = list(weekly_averages.keys())
+    weekly_y = list(weekly_averages.values())
+
+    monthly_fig = plt.figure()

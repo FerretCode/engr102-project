@@ -1,6 +1,10 @@
 # engr102-project
 
-A tool to analyze peak ridership times in - New York City - San Francisco - Washington DC
+A tool to analyze peak ridership times in
+
+- New York City
+- San Francisco
+- Washington DC
 
 # Project Setup
 
@@ -27,6 +31,14 @@ python -m venv ./.venv
 
 ```sh
 pip install -r requirements.txt
+```
+
+OR
+
+```sh
+pip install pandas
+pip install tabulate
+pip install matplotlib
 ```
 
 - Run the project
