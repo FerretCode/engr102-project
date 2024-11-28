@@ -1,2 +1,4 @@
 *.csv
 .venv/
+monthly_ridership.png
+weekly_ridership.png

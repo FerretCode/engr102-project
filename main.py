@@ -134,6 +134,9 @@ for agency in ridership_data:
     monthly_averages = {}
     weekly_averages = {}
 
+    for month in range(0, 12):
+        monthly_averages[month] = 0
+
     # for every month, we will grab the month and its respective datapoints
     for month, datapoints in monthly_ridership.items():
         # just get the list of ridership numbers
@@ -165,10 +168,29 @@ for agency in ridership_data:
     print(tabulate(tabular_weekly_averages, headers=[
           "Weekday #", "Average Ridership"], tablefmt="grid"))
 
-    monthly_x = list(monthly_averages.keys())
+    # create weekly and monthly data for the plot
+    monthly_x = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "Novermber", "December"]
     monthly_y = list(monthly_averages.values())
 
-    weekly_x = list(weekly_averages.keys())
+    weekly_x = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     weekly_y = list(weekly_averages.values())
 
-    monthly_fig = plt.figure()
+    # create the monthly chart
+    monthly_fig = plt.figure(figsize=(15, 5))
+
+    plt.bar(monthly_x, monthly_y, color='blue')
+
+    plt.xlabel("Month")
+    plt.ylabel("Average Monthly Ridership")
+    plt.title("Average Ridership Accross 12 Months")
+    plt.savefig("monthly_ridership.png")
+
+    # create the weekly chart
+    weekly_fig = plt.figure(figsize=(10, 5))
+
+    plt.bar(weekly_x, weekly_y, color='blue')
+
+    plt.xlabel("Weekday")
+    plt.ylabel("Average Ridership")
+    plt.title("Average Ridership Per Weekday")
+    plt.savefig("weekly_ridership.png")
